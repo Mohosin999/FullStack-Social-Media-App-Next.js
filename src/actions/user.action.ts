@@ -59,7 +59,7 @@ export const getUserByClerkId = async (clerkId: string) => {
 // Get user id from database
 export const getDbUserId = async () => {
   const { userId: clerkId } = await auth();
-  if (!clerkId) throw new Error("Unauthorized");
+  if (!clerkId) return null;
 
   const user = await getUserByClerkId(clerkId);
 
