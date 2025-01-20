@@ -69,8 +69,9 @@ export const getDbUserId = async () => {
 };
 
 // Get random users
-export async function getRandomUsers() {
+export const getRandomUsers = async () => {
   try {
+    // This id comes from database
     const userId = await getDbUserId();
 
     if (!userId) return [];
@@ -79,7 +80,9 @@ export async function getRandomUsers() {
     const randomUsers = await prisma.user.findMany({
       where: {
         AND: [
+          // Don't show my profile
           { NOT: { id: userId } },
+          // Don't show the profiles of users that I already follow
           {
             NOT: {
               followers: {
@@ -110,9 +113,9 @@ export async function getRandomUsers() {
     console.log("Error fetching random users", error);
     return [];
   }
-}
+};
 
-export async function toggleFollow(targetUserId: string) {
+export const toggleFollow = async (targetUserId: string) => {
   try {
     const userId = await getDbUserId();
 
@@ -123,8 +126,8 @@ export async function toggleFollow(targetUserId: string) {
     const existingFollow = await prisma.follows.findUnique({
       where: {
         followerId_followingId: {
-          followerId: userId,
-          followingId: targetUserId,
+          followerId: userId, // my id
+          followingId: targetUserId, // who I'm following
         },
       },
     });
@@ -165,4 +168,4 @@ export async function toggleFollow(targetUserId: string) {
     console.log("Error in toggleFollow", error);
     return { success: false, error: "Error toggling follow" };
   }
-}
+};

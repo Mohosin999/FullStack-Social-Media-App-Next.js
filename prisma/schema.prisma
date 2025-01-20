@@ -63,7 +63,7 @@ model Comment{
   createdAt DateTime @default(now())
 
   // Relations
-  author User @relation(fields: [authorId],references: [id],onDelete: Cascade)
+  author User @relation(fields: [authorId],references: [id], onDelete: Cascade)
   post Post @relation(fields: [postId],references: [id], onDelete: Cascade)
   notifications Notification[]
 
@@ -94,6 +94,7 @@ model Follows{
   following   User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
 
   @@index([followerId,followingId]) // composite index for faster queries
+  // @@unique is not used here, because here don't have a separate primary key named.
   @@id([followerId, followingId]) // composite primary key prevents duplicate follows
 }
 

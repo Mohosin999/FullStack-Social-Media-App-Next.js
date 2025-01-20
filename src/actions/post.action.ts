@@ -28,7 +28,7 @@ export const createPost = async (content: string, image: string) => {
   }
 };
 
-export async function getPosts() {
+export const getPosts = async () => {
   try {
     const posts = await prisma.post.findMany({
       orderBy: {
@@ -77,9 +77,9 @@ export async function getPosts() {
     console.log("Error in getPosts", error);
     throw new Error("Failed to fetch posts");
   }
-}
+};
 
-export async function toggleLike(postId: string) {
+export const toggleLike = async (postId: string) => {
   try {
     const userId = await getDbUserId();
     if (!userId) return;
@@ -141,9 +141,9 @@ export async function toggleLike(postId: string) {
     console.error("Failed to toggle like:", error);
     return { success: false, error: "Failed to toggle like" };
   }
-}
+};
 
-export async function createComment(postId: string, content: string) {
+export const createComment = async (postId: string, content: string) => {
   try {
     const userId = await getDbUserId();
 
@@ -190,9 +190,9 @@ export async function createComment(postId: string, content: string) {
     console.error("Failed to create comment:", error);
     return { success: false, error: "Failed to create comment" };
   }
-}
+};
 
-export async function deletePost(postId: string) {
+export const deletePost = async (postId: string) => {
   try {
     const userId = await getDbUserId();
 
@@ -215,4 +215,4 @@ export async function deletePost(postId: string) {
     console.error("Failed to delete post:", error);
     return { success: false, error: "Failed to delete post" };
   }
-}
+};
