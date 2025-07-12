@@ -18,7 +18,6 @@ const DesktopNavbar = async () => {
           <span className="hidden lg:inline">Home</span>
         </Link>
       </Button>
-      9.lo
       {user ? (
         <>
           <Button variant="ghost" className="flex items-center gap-2" asChild>
