@@ -27,6 +27,8 @@ const DesktopNavbar = async () => {
               <span className="hidden lg:inline">Notifications</span>
             </Link>
           </Button>
+
+          {/* Profile */}
           <Button variant="ghost" className="flex items-center gap-2" asChild>
             <Link
               href={`/profile/${

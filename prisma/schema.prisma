@@ -36,8 +36,6 @@ model User {
 
   notifications Notification[] @relation("userNotifications") // notifications received by a user
   notificationsCreated Notification[] @relation("notificationCreator") // notifications triggered by a user
-  sentMessages Message[] @relation("SentMessages") // messages sent by this user
-  receivedMessages Message[] @relation("ReceivedMessages") // messages received by this user
 }
 
 
@@ -119,15 +117,6 @@ model Notification {
   @@index([userId, createdAt])
 }
 
-model Message {
-  id String @id @default(cuid())
-  senderId String
-  receiverId String
-  content String
-  createdAt DateTime @default(now())
-  sender User @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
-  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
-}
 
 enum NotificationType {
   LIKE     
