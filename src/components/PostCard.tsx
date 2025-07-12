@@ -122,7 +122,13 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
                   />
                 )}
               </div>
-              <p className="mt-2 text-sm text-foreground break-words">
+              {/* <p className="mt-2 text-sm text-foreground break-words">
+                {post.content}
+              </p> */}
+              <p
+                className="mt-2 text-sm text-foreground break-words"
+                style={{ whiteSpace: "pre-line" }}
+              >
                 {post.content}
               </p>
             </div>
