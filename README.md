@@ -76,5 +76,4 @@ Follow these steps to set up Tweetly on your local machine:
 ### `Clone the Repository`
 
 ```bash
-git clone https://github.com/your-username/tweetly.git
-cd tweetly
+[git clone https://github.com/your-username/tweetly.git](https://github.com/Mohosin999/FullStack-Social-Media-App-Next.js.git)
