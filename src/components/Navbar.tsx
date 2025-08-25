@@ -6,10 +6,9 @@ import { currentUser } from "@clerk/nextjs/server";
 import { syncUser } from "@/actions/user.action";
 
 const Navbar = async () => {
-  // Get current user
   const user = await currentUser();
   // If user is authenticated, save it within db
-  if (user) await syncUser(); // POST
+  if (user) await syncUser();
 
   return (
     <nav className="sticky top-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">

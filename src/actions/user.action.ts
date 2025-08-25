@@ -57,13 +57,29 @@ export const getUserByClerkId = async (clerkId: string) => {
 };
 
 // Get user id from database
+// export const getDbUserId = async () => {
+//   const { userId: clerkId } = await auth();
+//   if (!clerkId) return null;
+
+//   const user = await getUserByClerkId(clerkId);
+
+//   if (!user) throw new Error("User not found");
+
+//   return user.id;
+// };
 export const getDbUserId = async () => {
   const { userId: clerkId } = await auth();
   if (!clerkId) return null;
 
-  const user = await getUserByClerkId(clerkId);
+  let user = await getUserByClerkId(clerkId);
 
-  if (!user) throw new Error("User not found");
+  if (!user) {
+    // Try to sync user and fetch again
+    await syncUser();
+    user = await getUserByClerkId(clerkId);
+  }
+
+  if (!user) throw new Error("User not found even after syncing");
 
   return user.id;
 };
@@ -105,7 +121,7 @@ export const getRandomUsers = async () => {
           },
         },
       },
-      take: 3,
+      take: 5,
     });
 
     return randomUsers;
