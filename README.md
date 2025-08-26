@@ -1,5 +1,7 @@
 # Tweetly: A Next.js Full-Stack Social Media Application
 
+## Error: Upload photo section not working in production.
+
 ## 📑 Table of Contents
 
 - [Description](#-description)
